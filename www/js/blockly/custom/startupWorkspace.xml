@@ -1,0 +1,122 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables></variables>
+  <block type="dayrate" id="mc=`[r5|ikG=@~MpwOEQ" x="10" y="-2">
+    <value name="dayrate">
+      <block type="math_number" id="N~i~src}CdBT#ToQ:Of=">
+        <field name="NUM">0.5</field>
+      </block>
+    </value>
+    <next>
+      <block type="graph6" id="|Lf@Z;Pq^vM|/R[|~EU%">
+        <value name="graph6">
+          <block type="maxpower" id="g]D9Zp(y,Bg*q,B_B0}n"></block>
+        </value>
+        <next>
+          <block type="graph5" id=";G!dVheCrbXErtE.F0V5">
+            <value name="graph5">
+              <block type="power" id="%?{Ou.~eHYkId^hJGAT#"></block>
+            </value>
+            <next>
+              <block type="graph1" id="JP~9HjJ$)xcUK;1kg)EE">
+                <value name="graph1">
+                  <block type="math_arithmetic" id="7fvwYP$XDoK_*i_*me;X">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <shadow type="math_number" id="a$)RO62Y[5w,|8EbYrgq">
+                        <field name="NUM">1</field>
+                      </shadow>
+                      <block type="sensorTL" id=")b_3`!g~BbPXnr{E-}ut"></block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="K3pK-0zTSK{fld8Xc8=`">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="graph2" id="/WA]Wz;h%,16Swdv`lig">
+                    <value name="graph2">
+                      <block type="math_arithmetic" id="%u=g_S{JhGR%WJOH]%Eu">
+                        <field name="OP">MINUS</field>
+                        <value name="A">
+                          <shadow type="math_number" id="3MQ4*TO6G/naqIh_g}BG">
+                            <field name="NUM">1</field>
+                          </shadow>
+                          <block type="sensorTR" id="JmHytF+G|qhO=bDK$Zr]"></block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="gKSXTw~l3%CgN/3V0%-B">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="graph4" id="?;N(yo$@?MQ[7cRzuiAU">
+                        <value name="graph4">
+                          <block type="math_arithmetic" id="7(l|uf-Rw0kC?FQ1+?iv">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <shadow type="math_number" id="NuHo_GPFuwrkC[g}73X5">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="sensorBL" id="gvXV%mHT8UH#MkDM46C}"></block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="?gN9CdIYB0^InGXMK^*u">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="graph3" id="cw/x]i07G5dmN@i2g=I]">
+                            <value name="graph3">
+                              <block type="math_arithmetic" id="llgl`dZUK/m]dh,xVX$a">
+                                <field name="OP">MINUS</field>
+                                <value name="A">
+                                  <shadow type="math_number" id="~[3@nL/)O6)u)#Wz.m_{">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                  <block type="sensorBR" id="FI`1P]hU*e^=2FALr_GW"></block>
+                                </value>
+                                <value name="B">
+                                  <shadow type="math_number" id="%guE1-foS1%4/zeKG:K$">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="panelAlt" id="+e[`TDX9=db}SO6)8jpn">
+                                <value name="panelAlt">
+                                  <block type="math_number" id="8ab]Hm1=H^[hJ0pK5R=Q">
+                                    <field name="NUM">0.45</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="panelAziRate" id="]aFk85?hP4LcVw-z0LpA">
+                                    <value name="panelAziRate">
+                                      <block type="math_number" id="]4FXc8?Un=-`Gj?/G;@_">
+                                        <field name="NUM">0.1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

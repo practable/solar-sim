@@ -1,0 +1,28 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+	<variables></variables>
+	<block type="panelAlt" id="+e[`TDX9=db}SO6)8jpn" x="71" y="56">
+	<value name="panelAlt">
+	  <block type="math_number" id="8ab]Hm1=H^[hJ0pK5R=Q">
+		<field name="NUM">0.45</field>
+	  </block>
+	</value>
+	</block>
+	<block type="panelAzi" id="49EUnA|qPt01(Y~.V[)d" x="71" y="92">
+	<value name="panelAzi">
+	  <block type="math_arithmetic" id="~#6:lDhm9H`zZ~!-`%c4">
+		<field name="OP">ADD</field>
+		<value name="A">
+		  <shadow type="math_number" id="uXqk[kuM$6d+2}@Zv[q(">
+			<field name="NUM">1</field>
+		  </shadow>
+		  <block type="panelTurnIn" id="I$2P}(mmX99U~0UvRu-}"></block>
+		</value>
+		<value name="B">
+		  <shadow type="math_number" id="C0i7w^J}lw!yQLqhK/sH">
+			<field name="NUM">0.01</field>
+		  </shadow>
+		</value>
+	  </block>
+	</value>
+	</block>
+</xml>

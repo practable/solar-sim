@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel</title>
+	<body background="images/bg.jpg">
+    <link rel="stylesheet" href="js/jspanel/jspanel.css">
+	<style>
+	  table {
+      height: 100%;
+      width: 100%;
+    }
+    #blocklyArea {
+      height: 99%;
+      background: #fc9;
+      text-align: center;
+    }
+
+  body:after{
+  content: "beta";
+  position: fixed;
+  width: 80px;
+  height: 25px;
+  background: #EE8E4A;
+  bottom: 7px;
+  left: -20px;
+  text-align: center;
+  font-size: 13px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  line-height: 27px;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+  z-index:9999999;
+}
+
+button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+	width: 100%; /* Set a width if needed */
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+.btn-group button {
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 5px 5px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 100%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+}
+
+.btn-group button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #3e8e41;
+}
+
+.horiz-btn-group button {
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 5px 5px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 20%;
+    float: left; /* Make the buttons appear side by side */
+}
+
+.horiz-btn-group button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.horiz-btn-group button:hover {
+    background-color: #3e8e41;
+}
+
+
+	</style>
+</head>
+<body>
+
+	<!--<div id="info" style="hidden">
+		In development - solar panel tracker by Tim Drysdale<br>
+		Loc: 55.9231N 3.1879W (Edinburgh Observatory)
+	</div>-->
+	
+	<div id="renderHere"></div>
+	
+	<canvas id="graphHere" width="400" height="180"></canvas>
+	
+	<div id="clockAndControl">
+		<canvas id="clock" width="100" height="100" 
+		        style="background-color:#333; z-index: 1">
+		</canvas>
+		<div id="run"></div>
+	</div>
+	
+	<div id="score">
+	</div>
+
+        <div id="master"> </div>
+
+	<div id="save" class='btn-group'>
+	</div>
+        
+        <div id="data" class='btn-group'>
+        </div>
+
+        <div id="consent">
+      
+        <h1>Help improve technologies for learning</h1>
+   <div> 
+        <img src="images/tdd.jpg" alt="Prof. Tim Drysdale" style="float:left;width:128px;height:128px;">
+A request from <b>Prof. Timothy Drysdale</b><br>
+<i>          Chair of Technology Enhanced Science Education<br>
+          School of Engineering<br>
+          The University of Edinburgh<br>
+        </i>
+<br><br><br><br>
+    </div>    
+        <div>
+        I've read the  <a href="docs/project_description.pdf" download>project description</a> and agree to let you collect my Blockly code, panel layout changes, and simulation results.</div>
+        <div style="width:45%;float:right" id="consentButton"></div>  
+
+        </div>
+
+
+ 
+	<div id="scroll" class='horiz-btn-group'>
+
+	</div>
+	
+	<div id="blocklyTextArea" style="display:none">
+	</div>
+	
+	<div>
+		<canvas id="sensors" width="180" height="180"
+				style="background-color:#eee">
+		</canvas>
+	</div>
+	
+	<div id = 'blocklyDOM'>
+		<div id="blocklyDiv" style="position: absolute">
+		</div>
+		<canvas id="blocklyArea" width="1000" height="1000"
+				style="background-color:#000">
+		</canvas>
+	</div> 
+	
+        <!-- this is used for logging, and cache - be unique!-->
+        <div id="projectName"></div>
+	<script> document.getElementById("projectName").value = "solar"; </script>
+
+
+	<script src="js/libs/jquery-3.3.1.min.js"></script>
+	<script src="js/consent.js"></script>
+	<script src="js/three.js"></script>
+	<script src="js/objects/Sky.js"></script>
+	<script src="js/libs/dat.gui.min.js"></script>
+	<script src="js/controls/OrbitControls.js"></script>
+	<script src="js/loaders/GLTFLoader.js"></script>
+	<script src="js/Detector.js"></script>
+	<script src="js/libs/stats.min.js"></script>
+	<script src="js/modlibs/pureknob.js"></script>
+	<script src="js/score.js"></script>
+	<script src="js/sun/suncalc.js"></script>
+	<script type="text/javascript" src="js/modlibs/smoothie.js"></script>
+	<script type="text/javascript" src="js/graphs/solar.js"></script>
+	<script type="text/javascript" src="js/solarpanel.js"></script>
+	<script type="text/javascript" src="js/clock.js"></script>
+	<script src="js/sensors/shapes.js"></script>
+	<script> shapes_init() </script>
+	
+	<script src="js/mylibs/gridpanel.js"></script>
+	<script src="js/mylibs/metagrid.js"></script>
+	
+    <script src="js/jspanel/jspanel.js"></script>
+    <script src="js/jspanel/extensions/contextmenu/jspanel.contextmenu.js"></script>
+    <script src="js/jspanel/extensions/hint/jspanel.hint.js"></script>
+    <script src="js/jspanel/extensions/modal/jspanel.modal.js"></script>
+    <script src="js/jspanel/extensions/tooltip/jspanel.tooltip.js"></script>
+    <script src="js/jspanel/extensions/dock/jspanel.dock.js"></script>
+	<script type="text/javascript" src="js/jspanels.js"></script>
+	<script src="js/blockly/blockly_compressed.js"></script>
+	<script src="js/blockly/blocks_compressed.js"></script>
+	<script src="js/blockly/msg/en.js"></script>
+	<script src="js/blockly/javascript_compressed.js"></script>
+	<script src="js/blockly/custom/solar_blocks.js"></script>
+	<script src="js/blockly/custom/save.js"></script>
+    <script src="js/timeout.js"></script>
+    <script src="js/scroll.js"></script>
+
+
+	<xml id="toolbox" style="display: none">
+		<category name="External" colour="180">
+		<category name = "Inputs" colour="90">
+			<block type="sensorTL"></block>
+			<block type="sensorTR"></block>
+			<block type="sensorBL"></block>
+			<block type="sensorBR"></block>
+			<block type="power"></block>
+			<block type="maxpower"></block>
+			<block type="panelTiltIn"></block>
+			<block type="panelTurnIn"></block>
+			<block type="day"></block>
+		</category>
+		<category name="Outputs" colour="180">
+			<block type="panelAzi"></block>
+			<block type="panelAlt"></block>
+			<block type="panelAziRate"></block>
+			<block type="panelAltRate"></block>
+			<block type="setday"></block>
+			<block type="dayrate"></block>
+			<block type="graph1"></block>
+			<block type="graph2"></block>
+			<block type="graph3"></block>
+			<block type="graph4"></block>
+			<block type="graph5"></block>
+			<block type="graph6"></block>			
+		</category>
+		</category>	
+		<category name="Logic" colour="210">
+		  <block type="controls_if"></block>
+		  <block type="logic_compare"></block>
+		  <block type="logic_operation"></block>
+		  <block type="logic_negate"></block>
+		  <block type="logic_boolean"></block>
+		  <block type="logic_null"></block>
+		  <block type="logic_ternary"></block>
+		</category>
+		
+		<category name="Maths" colour="230">
+		  <block type="math_number"></block>
+		  <block type="math_arithmetic">
+			<value name="A">
+			  <shadow type="math_number">
+				<field name="NUM">1</field>
+			  </shadow>
+			</value>
+			<value name="B">
+			  <shadow type="math_number">
+				<field name="NUM">1</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_single">
+			<value name="NUM">
+			  <shadow type="math_number">
+				<field name="NUM">9</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_trig">
+			<value name="NUM">
+			  <shadow type="math_number">
+				<field name="NUM">45</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_constant"></block>
+		  <block type="math_number_property">
+			<value name="NUMBER_TO_CHECK">
+			  <shadow type="math_number">
+				<field name="NUM">0</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_round">
+			<value name="NUM">
+			  <shadow type="math_number">
+				<field name="NUM">3.1</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_on_list"></block>
+		  <block type="math_modulo">
+			<value name="DIVIDEND">
+			  <shadow type="math_number">
+				<field name="NUM">64</field>
+			  </shadow>
+			</value>
+			<value name="DIVISOR">
+			  <shadow type="math_number">
+				<field name="NUM">10</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_constrain">
+			<value name="VALUE">
+			  <shadow type="math_number">
+				<field name="NUM">50</field>
+			  </shadow>
+			</value>
+			<value name="LOW">
+			  <shadow type="math_number">
+				<field name="NUM">1</field>
+			  </shadow>
+			</value>
+			<value name="HIGH">
+			  <shadow type="math_number">
+				<field name="NUM">100</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_random_int">
+			<value name="FROM">
+			  <shadow type="math_number">
+				<field name="NUM">1</field>
+			  </shadow>
+			</value>
+			<value name="TO">
+			  <shadow type="math_number">
+				<field name="NUM">100</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="math_random_float"></block>
+		</category>
+			<category name="Variables" colour="330" custom="VARIABLE">  </category>
+
+		</category>
+		<category name="Functions" colour="290" custom="PROCEDURE"></category>
+	
+	</xml>
+	
+	
+
+<script src="js/blockly.js"></script>
+<script src="js/libs/traverse.js"></script>
+<script src="js/logging.js"></script>
+
+
+</body>
+</html>
+
+
+

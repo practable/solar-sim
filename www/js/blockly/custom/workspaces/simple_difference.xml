@@ -1,0 +1,99 @@
+"<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="Z,gAY;xhNF{tncenH]Lk">difference</variable>
+  </variables>
+  <block type="panelAlt" id="+e[`TDX9=db}SO6)8jpn" x="-9" y="-11">
+    <value name="panelAlt">
+      <block type="math_number" id="8ab]Hm1=H^[hJ0pK5R=Q">
+        <field name="NUM">0.5</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="_.p}W^GQ8u%fCHQ-LYFD">
+        <field name="VAR" id="Z,gAY;xhNF{tncenH]Lk" variabletype="">difference</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="~Jt$X~%.K`wveyr:L)55">
+            <field name="OP">MINUS</field>
+            <value name="A">
+              <shadow type="math_number" id="D,L:]NAAUxfQQRc5fr$A">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="sensorTL" id="RfKJ./Z4N/udH])zJzp]"></block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="8pRitB]cw(u/IOlWAQK/">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="sensorTR" id="26G6Fy,X(kc(OE$2zUmO"></block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="]7+P;=;tkyCMg:6]FHxp">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id=")uWY4(ugaN#Kq6(=gO-+">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="sensorTL" id="B6)Lnpk?[KPw46Pt6S10"></block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="-%5@M?CI5QhvenvWOoko">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if" id=")-@R57|NQ88rGc1~Reo;">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="7eg0CCM8/,UV#Q;a(B_v">
+                    <field name="OP">GT</field>
+                    <value name="A">
+                      <block type="variables_get" id="`-UXJA}+uL3WHbD,$QuC">
+                        <field name="VAR" id="Z,gAY;xhNF{tncenH]Lk" variabletype="">difference</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="x=(Ei:)j$BLF?WC45$+~">
+                        <field name="NUM">0.1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="panelAziRate" id="RBogXaCG9fb!i1{RS}eR">
+                    <value name="panelAziRate">
+                      <block type="math_number" id=";ek.Vaj}S}.1BxuBbXVo">
+                        <field name="NUM">-0.1</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="panelAziRate" id="@exu|[C_1-Yr)c_|H#@C">
+                    <value name="panelAziRate">
+                      <block type="math_number" id="%*VG~P:yCznr0Q[p4-eL">
+                        <field name="NUM">0.09</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="panelAzi" id="49EUnA|qPt01(Y~.V[)d">
+                <value name="panelAzi">
+                  <block type="math_number" id="3KY^~)@zj#0c%f`aD^e9">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>"
